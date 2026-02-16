@@ -2,21 +2,29 @@ package prima
 
 import "fmt"
 
-func Pascal(j, i int) int {
-	if j == 0 || j == i {
-		return 1
+func isPrima(n int) bool {
+	if n < 2 {
+		return false
 	}
-	return Pascal(j-1, i-1) + Pascal(j, i-1)
+	for i := 2; i <= n/2; i++ {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
 }
 
-func ShowPascal(n int) {
-	for i := 0; i < n; i++ {
-		for x := 0; x < n-i; x++ {
-			fmt.Printf(" ")
+func ShowPrima(n int) {
+	count := 0
+	for i := range n {
+		if isPrima(i) {
+			fmt.Printf("%3d", i)
+			count++
+			if count == 5 {
+				fmt.Println()
+				count = 0
+				continue
+			}
 		}
-		for j := 0; j < i; j++ {
-			fmt.Printf("%2d", Pascal(j, i-1))
-		}
-		fmt.Println()
 	}
 }
